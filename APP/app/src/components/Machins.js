@@ -13,7 +13,7 @@ export default function Machins() {
             .then(data => data.json())
             .then(data => setSlitter(data.slitter))
             .then(err => console.log(err))
-    })
+    }, [])
 
 
 

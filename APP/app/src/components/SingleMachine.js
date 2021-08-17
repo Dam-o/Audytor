@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-export default function SingleMachine({ name, type, lastAudit }) {
+export default function SingleMachine({ name }) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -39,10 +39,6 @@ export default function SingleMachine({ name, type, lastAudit }) {
                 <SettingsIcon
                     className={classes.icon} />
                 {name}
-            </Typography>
-            <Typography
-                variant="h6">
-                Ostatni audyt: {lastAudit}
             </Typography>
 
             <Button

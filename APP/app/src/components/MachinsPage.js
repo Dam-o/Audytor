@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container'
 import { Grid, Card, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { display, height, width } from '@material-ui/system';
+
 
 
 const useStyles = makeStyles(() => ({
@@ -43,7 +43,7 @@ export default function MachinsPage() {
             .then(data => data.json())
             .then(data => setSlitter(data.slitter))
             .then(err => console.log(err))
-    })
+    }, []);
 
 
 
@@ -74,10 +74,18 @@ export default function MachinsPage() {
                                             {item.type}
                                         </Typography>
                                     </div>
-                                    <Typography
-                                        variant="body1.">
-                                        Ostatni audyt:{item.lastAudit}
-                                    </Typography>
+                                    <div>
+                                        <Typography
+                                            variant="subtitle1">
+                                            Ostatni audyt:{item.lastAudit}
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle1">
+                                            Wynik:{item.status}
+                                        </Typography>
+
+                                    </div>
+
 
                                 </Card>
                             </Grid>

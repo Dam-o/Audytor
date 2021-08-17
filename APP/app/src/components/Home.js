@@ -4,6 +4,7 @@ import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import Widget from './Widget';
 import Machins from "./Machins";
+import moment from "moment";
 
 const useStyles = makeStyles(() => ({
     content: {
@@ -28,7 +29,7 @@ const Home = () => {
             className={classes.content}>
             <Container
                 fixed
-                maxWidth="lg"
+                maxWidth="xl"
                 className={classes.container}
             >
                 <Grid
@@ -36,13 +37,13 @@ const Home = () => {
                 >
                     <Grid
                         item
-                        xs={3}>
+                        xs={4}>
                         <Widget />
 
                     </Grid>
                     <Grid
                         item
-                        xs={9}>
+                        xs={8}>
                         <Machins />
                     </Grid>
                 </Grid>
