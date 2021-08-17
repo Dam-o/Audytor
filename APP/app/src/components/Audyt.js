@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function Audyt() {
     return (
-        <div>
+        <Container
+            className={classes.container}>
 
-        </div>
+        </Container>
     )
 }

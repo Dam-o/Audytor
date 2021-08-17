@@ -7,19 +7,17 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import HistoryIcon from '@material-ui/icons/History';
-
+import SettingsIcon from '@material-ui/icons/Settings';
 
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
-        position: 'relative',
         whiteSpace: 'nowrap',
         width: 240,
         height: "100vh",
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
+        marginTop: 65,
+        position: "absolute"
+
     },
 
     paper: {
@@ -92,6 +90,13 @@ export default function Menu() {
                 </NavLink>
                 <NavLink
                     className={classes.listItem}
+                    to="/machins">
+                    <SettingsIcon
+                        className={classes.icon} />
+                    Maszyny
+                </NavLink>
+                <NavLink
+                    className={classes.listItem}
                     to="/history">
                     <HistoryIcon
                         className={classes.icon} />
@@ -99,6 +104,6 @@ export default function Menu() {
                 </NavLink>
             </List>
 
-        </Drawer>
+        </Drawer >
     )
 }
