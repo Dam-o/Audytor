@@ -4,7 +4,7 @@ import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import Widget from './Widget';
 import Machins from "./Machins";
-import moment from "moment";
+
 
 const useStyles = makeStyles(() => ({
     content: {
@@ -44,6 +44,7 @@ const Home = () => {
                     <Grid
                         item
                         xs={8}>
+
                         <Machins />
                     </Grid>
                 </Grid>

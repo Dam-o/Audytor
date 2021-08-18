@@ -24,17 +24,11 @@ const useStyles = makeStyles(() => ({
         width: 155,
         height: 155,
         marginBottom: 15,
-    },
-
-    method: {
-        marginTop: 55,
-        width: 250,
-        height: 250,
+    }
 
 
-    },
+}));
 
-}))
 
 
 const Widget = () => {
@@ -59,13 +53,6 @@ const Widget = () => {
                     Dodaj audyt
                 </Typography>
             </Paper>
-
-            <img
-                src={`${process.env.PUBLIC_URL}/assets/images/5S_methodology.png`}
-                alt="5s_image"
-                className={classes.method}>
-            </img>
-
 
         </Container>
     )
