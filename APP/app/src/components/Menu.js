@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         whiteSpace: 'nowrap',
         width: 240,
-        height: "100vh",
         marginTop: 65,
-        position: "absolute"
+        position: "absolute",
+        height: 900
 
     },
 
