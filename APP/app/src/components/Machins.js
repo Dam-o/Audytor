@@ -6,12 +6,12 @@ import SingleMachine from './SingleMachine';
 export default function Machins() {
     const [slitter, setSlitter] = useState([]);
 
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/db";
+    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
 
     useEffect(() => {
         fetch(url)
             .then(data => data.json())
-            .then(data => setSlitter(data.slitter))
+            .then(data => setSlitter(data))
             .then(err => console.log(err))
     }, [])
 

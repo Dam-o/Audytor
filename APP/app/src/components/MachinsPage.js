@@ -36,18 +36,14 @@ export default function MachinsPage() {
     const [slitter, setSlitter] = useState([]);
     const classes = useStyles();
 
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/db";
+    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";;
 
     useEffect(() => {
         fetch(url)
             .then(data => data.json())
-            .then(data => setSlitter(data.slitter))
+            .then(data => setSlitter(data))
             .then(err => console.log(err))
     }, []);
-
-
-
-
 
     return (
 
@@ -83,10 +79,7 @@ export default function MachinsPage() {
                                             variant="subtitle1">
                                             Wynik:{item.status}
                                         </Typography>
-
                                     </div>
-
-
                                 </Card>
                             </Grid>
                         )
