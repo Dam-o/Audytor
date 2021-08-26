@@ -41,7 +41,7 @@ const Widget = () => {
         <Container>
 
             <Paper
-                onClick={() => history.push("/audit")}
+                onClick={() => history.push("/audyt")}
                 className={classes.paper}
 
             >

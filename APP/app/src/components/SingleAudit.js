@@ -47,16 +47,14 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
+
 export default function SingleAudit({ name, id, getMachins }) {
     const classes = useStyles();
     const [info, setInfo] = useState({
         lastAudit: "",
-        status: "",
         who: ""
     });
-
-
-    const [check, setCheck] = useState({
+    const [status, setStatus] = useState({
         answer1: "",
         answer2: "",
         answer3: "",
@@ -67,7 +65,9 @@ export default function SingleAudit({ name, id, getMachins }) {
         answer8: "",
         answer9: "",
         answer10: ""
-    });
+
+    })
+
 
     const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
 
@@ -82,10 +82,8 @@ export default function SingleAudit({ name, id, getMachins }) {
             method: "PUT",
             body: JSON.stringify({
                 lastAudit: info.lastAudit,
-                status: info.status,
+                status: status,
                 who: info.who
-
-
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -97,16 +95,6 @@ export default function SingleAudit({ name, id, getMachins }) {
             .catch(err => console.log(err))
     };
 
-    const dataHandler = (e) => {
-        const { name, value } = e.target;
-        setCheck(prev => {
-            return {
-                ...prev,
-                [name]: value,
-            }
-        })
-    };
-
     const infoHandler = (e) => {
         const { name, value } = e.target;
         setInfo(prev => {
@@ -116,6 +104,20 @@ export default function SingleAudit({ name, id, getMachins }) {
             }
         })
     }
+
+
+
+    const statusHandler = (e) => {
+        const { name, value } = e.target;
+        setStatus(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        })
+    }
+
+
     return (
         <Accordion>
             <AccordionSummary
@@ -163,10 +165,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="sortSection"
                                     name="answer1"
-                                    onChange={dataHandler}
-                                >
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -178,9 +179,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="sortSection"
                                     name="answer2"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -192,9 +193,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="setInOrderSection"
                                     name="answer3"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -206,9 +207,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="setInOrderSection"
                                     name="answer4"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -220,9 +221,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="shineSection"
                                     name="answer5"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                         </div>
@@ -237,9 +238,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="shineSection"
                                     name="answer6"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -251,9 +252,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="standarizeSection"
                                     name="answer7"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -265,9 +266,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="standarizeSection"
                                     name="answer8"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -279,9 +280,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="sustainSection"
                                     name="answer9"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                             <Card
@@ -293,9 +294,9 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     className={classes.radioGroup}
                                     aria-label="sustainSection"
                                     name="answer10"
-                                    onChange={dataHandler}>
-                                    <FormControlLabel value="10" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="0" control={<Radio />} label="Nie" />
+                                    onChange={statusHandler} >
+                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
+                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
                             </Card>
                         </div>

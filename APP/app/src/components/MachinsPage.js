@@ -35,8 +35,7 @@ const useStyles = makeStyles(() => ({
 export default function MachinsPage() {
     const [slitter, setSlitter] = useState([]);
     const classes = useStyles();
-
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";;
+    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
 
     useEffect(() => {
         fetch(url)
@@ -77,7 +76,7 @@ export default function MachinsPage() {
                                         </Typography>
                                         <Typography
                                             variant="subtitle1">
-                                            Wynik:{item.status}
+                                            Wynik:{item.status.answer1}
                                         </Typography>
                                     </div>
                                 </Card>

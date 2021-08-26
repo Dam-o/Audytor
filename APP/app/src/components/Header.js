@@ -1,8 +1,6 @@
 
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { Typography } from '@material-ui/core';
+import { Link, Toolbar, AppBar } from '@material-ui/core';
 import Menu from "./Menu";
 
 
@@ -15,10 +13,13 @@ export default function Header() {
                 position='static'
             >
                 <Toolbar>
-                    <Typography
-                        variant='h4'>
-                        Audytor
-                    </Typography>
+
+                    <Link
+                        className="link"
+                        href="/"
+                        variant="h4"
+                        color="inherit"
+                    >Audytor</Link>
                 </Toolbar>
             </AppBar>
             <Menu />

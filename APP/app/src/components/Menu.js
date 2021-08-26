@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         width: 240,
         marginTop: 65,
         position: "absolute",
-        height: 900
+        height: "100vh"
 
     },
 
