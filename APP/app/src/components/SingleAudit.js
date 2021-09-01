@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Typography, FormControl, Box, TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
+import { Button, Typography, FormControl, Box, TextField, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AuditCard from './styles/AuditCard';
 import QuestionsContainer from './styles/QuestionsContainer';
 import Error from './Error';
+import Question from './Question';
 
 const useStyles = makeStyles(() => ({
     text: {
@@ -19,12 +20,6 @@ const useStyles = makeStyles(() => ({
     input: {
         marginBottom: 25,
         maxWidth: "49%",
-
-    },
-
-    radioGroup: {
-        display: "inline-block",
-        textAlign: "left"
     },
 
     questionsColumn: {
@@ -61,6 +56,7 @@ export default function SingleAudit({ name, id }) {
     const validate = () => {
         const nameError = {};
         const radioError = {};
+        const dateError = {};
         let isValid = true;
 
         if (info.who.trim().length < 3) {
@@ -70,6 +66,11 @@ export default function SingleAudit({ name, id }) {
 
         if (info.who.trim().length > 40) {
             nameError.longname = "Podane imię jest zbyt długie";
+            isValid = false;
+        }
+
+        if (info.lastAudit.length === 0) {
+            dateError.nodate = "Musisz wybrać datę";
             isValid = false;
         }
 
@@ -113,10 +114,12 @@ export default function SingleAudit({ name, id }) {
             radioError.empty = "Wybierz jedno";
             isValid = false;
         }
+        setDateError(dateError);
         setRadioError(radioError);
         setNameError(nameError);
         return isValid;
     };
+
 
     const addAudit = (id) => {
         fetch(`http://localhost:3001/slitter/${id}`, {
@@ -145,7 +148,6 @@ export default function SingleAudit({ name, id }) {
         }
     };
 
-
     const infoHandler = (e) => {
         const { name, value } = e.target;
         setInfo(prev => {
@@ -167,6 +169,7 @@ export default function SingleAudit({ name, id }) {
     };
 
     return (
+
         <Accordion>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -205,23 +208,22 @@ export default function SingleAudit({ name, id }) {
                         type="date"
                         onChange={infoHandler}
                     />
+                    {Object.keys(dateError).map((key) => {
+                        return (
+                            <Error
+                                key={key}
+                                name={dateError[key]} />
+                        )
+                    })}
                     <QuestionsContainer>
                         <Box
                             className={classes.questionsColumn}>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend"
-                                >1. Niepotrzebne urządzenia, narzędzia zostały usunięte</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="sortSection"
-                                    name="answer1"
-                                    onChange={statusHandler}
-                                >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"1. Niepotrzebne urządzenia, narzędzia zostały usunięte"}
+                                    label={"sortSection"}
+                                    name={"answer1"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -231,17 +233,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="sortSection"
-                                    name="answer2"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów"}
+                                    label={"sortSection"}
+                                    name={"answer2"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -251,17 +247,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="setInOrderSection"
-                                    name="answer3"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone"}
+                                    label={"setInOrderSection"}
+                                    name={"answer3"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -271,17 +261,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">4. Limity wysokości i ilości są oczywist</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="setInOrderSection"
-                                    name="answer4"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"4. Limity wysokości i ilości są oczywiste"}
+                                    label={"setInOrderSection"}
+                                    name={"answer4"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -291,17 +275,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="shineSection"
-                                    name="answer5"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc"}
+                                    label={"shineSection"}
+                                    name={"answer5"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -314,17 +292,11 @@ export default function SingleAudit({ name, id }) {
                         <Box
                             className={classes.questionsColumns}>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">6. Materiały czyszczące są łatwo dostępne</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="shineSection"
-                                    name="answer6"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"6. Materiały czyszczące są łatwo dostępne"}
+                                    label={"shineSection"}
+                                    name={"answer6"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -334,17 +306,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">7. Standardy są znane i widoczne</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="standarizeSection"
-                                    name="answer7"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"7. Standardy są znane i widoczne"}
+                                    label={"standarizeSection"}
+                                    name={"answer7"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -354,17 +320,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnyh</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="standarizeSection"
-                                    name="answer8"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnych"}
+                                    label={"standarizeSection"}
+                                    name={"answer8"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -374,17 +334,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">9. Wszyscy pracownicy przeszli szkolenie 5S</FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="sustainSection"
-                                    name="answer9"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"9. Wszyscy pracownicy przeszli szkolenie 5S"}
+                                    label={"sustainSection"}
+                                    name={"answer9"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -394,17 +348,11 @@ export default function SingleAudit({ name, id }) {
                                 })}
                             </AuditCard>
                             <AuditCard>
-                                <FormLabel
-                                    className={classes.formHelper}
-                                    component="legend">10. Wszystkie materiały i procedury są dostępne i aktualne </FormLabel>
-                                <RadioGroup
-                                    className={classes.radioGroup}
-                                    aria-label="sustainSection"
-                                    name="answer10"
-                                    onChange={statusHandler} >
-                                    <FormControlLabel value="pass" control={<Radio />} label="Tak" />
-                                    <FormControlLabel value="fail" control={<Radio />} label="Nie" />
-                                </RadioGroup>
+                                <Question
+                                    question={"10. Wszystkie materiały i procedury są dostępne i aktualne"}
+                                    label={"sustainSection"}
+                                    name={"answer10"}
+                                    func={statusHandler} />
                                 {Object.keys(radioError).map((key) => {
                                     return (
                                         <Error
@@ -424,6 +372,8 @@ export default function SingleAudit({ name, id }) {
                     </Button>
                 </FormControl>
             </AccordionDetails>
-        </Accordion>
+        </Accordion >
     )
 }
+
+

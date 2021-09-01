@@ -3,18 +3,18 @@
     {
       "name": "SM201",
       "type": "slitter",
-      "lastAudit": "",
+      "lastAudit": "2021-10-03",
       "status": {
-        "answer1": "",
-        "answer2": "",
-        "answer3": "",
-        "answer4": "",
-        "answer5": "",
-        "answer6": "",
-        "answer7": "",
-        "answer8": "",
-        "answer9": "",
-        "answer10": ""
+        "answer1": "pass",
+        "answer2": "fail",
+        "answer3": "pass",
+        "answer4": "pass",
+        "answer5": "pass",
+        "answer6": "pass",
+        "answer7": "pass",
+        "answer8": "pass",
+        "answer9": "pass",
+        "answer10": "pass"
       },
       "who": "Damian",
       "id": 1

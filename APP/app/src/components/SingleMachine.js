@@ -32,7 +32,6 @@ export default function SingleMachine({ name }) {
         <Card
             className={classes.card}
             onClick={() => history.push("/machins")}>
-
             <Typography
                 variant="h4"
             >
@@ -40,7 +39,6 @@ export default function SingleMachine({ name }) {
                     className={classes.icon} />
                 {name}
             </Typography>
-
             <Button
                 variant="contained"
                 color="primary"
