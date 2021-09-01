@@ -14,8 +14,7 @@ const useStyles = makeStyles(() => ({
     },
 
     container: {
-        width: "80%",
-        marginLeft: 275,
+
         marginTop: 25,
         overflow: 'hidden',
     },

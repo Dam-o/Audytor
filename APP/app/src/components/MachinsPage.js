@@ -8,8 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
 
     container: {
-        width: "80%",
-        marginLeft: 275,
+
         marginTop: 25,
         overflow: 'hidden',
         display: "flex",
@@ -35,7 +34,7 @@ const useStyles = makeStyles(() => ({
 export default function MachinsPage() {
     const [slitter, setSlitter] = useState([]);
     const classes = useStyles();
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
+    const url = "http://localhost:3001/slitter";
 
     useEffect(() => {
         fetch(url)
@@ -72,7 +71,7 @@ export default function MachinsPage() {
                                     <div>
                                         <Typography
                                             variant="subtitle1">
-                                            Ostatni audyt:{item.lastAudit}
+                                            Ostatni audyt: {item.lastAudit}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1">

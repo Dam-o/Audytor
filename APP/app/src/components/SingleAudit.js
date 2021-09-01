@@ -69,29 +69,31 @@ export default function SingleAudit({ name, id, getMachins }) {
     })
 
 
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
-
-    const machins = () => {
-        if (typeof getMachins === "function") {
-            getMachins();
-        }
-    };
+    const url = "http://localhost:3001/slitter";
+    //
+    //"http://localhost:3001/slitter"
+    // const machins = () => {
+    //     if (typeof getMachins === "function") {
+    //         getMachins();
+    //     }
+    // };
 
     const addAudit = (id) => {
         fetch(`${url}/${id}`, {
             method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 lastAudit: info.lastAudit,
                 status: status,
                 who: info.who
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            })
+
         })
             .then(response => response.json())
             .then(json => console.log(json))
-            .then(() => machins())
+            // .then(() => machins())
             .catch(err => console.log(err))
     };
 
@@ -160,12 +162,14 @@ export default function SingleAudit({ name, id, getMachins }) {
                                 className={classes.card}>
                                 <FormLabel
                                     className={classes.formHelper}
-                                    component="legend">1. Niepotrzebne urządzenia, narzędzia zostały usunięte</FormLabel>
+                                    component="legend"
+                                >1. Niepotrzebne urządzenia, narzędzia zostały usunięte</FormLabel>
                                 <RadioGroup
                                     className={classes.radioGroup}
                                     aria-label="sortSection"
                                     name="answer1"
-                                    onChange={statusHandler} >
+                                    onChange={statusHandler}
+                                >
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
@@ -300,7 +304,6 @@ export default function SingleAudit({ name, id, getMachins }) {
                                 </RadioGroup>
                             </Card>
                         </div>
-
                     </div>
                     <Button
                         type="submit"
