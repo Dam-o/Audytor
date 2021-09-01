@@ -9,7 +9,6 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import HistoryIcon from '@material-ui/icons/History';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: "100%",
@@ -48,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 }));
-
-
-
 
 
 export default function Menu() {
@@ -96,7 +92,6 @@ export default function Menu() {
                     Historia
                 </NavLink>
             </List>
-
         </Drawer >
     )
 }

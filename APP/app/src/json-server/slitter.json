@@ -1,24 +1,23 @@
 {
   "slitter": [
     {
-      "id": 1,
-      "name" : "SM201",
+      "name": "SM201",
       "type": "slitter",
-      "lastAudit": "2021-08-30",
+      "lastAudit": "",
       "status": {
-        "answer1": "pass",
-        "answer2": "fail",
-        "answer3": "pass",
-        "answer4": "pass",
-        "answer5": "pass",
-        "answer6": "pass",
-        "answer7": "pass",
-        "answer8": "fail",
-        "answer9": "pass",
-        "answer10": "pass"
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": "",
+        "answer6": "",
+        "answer7": "",
+        "answer8": "",
+        "answer9": "",
+        "answer10": ""
       },
-      "who": "Damian"
-      
+      "who": "Damian",
+      "id": 1
     },
     {
       "id": 2,

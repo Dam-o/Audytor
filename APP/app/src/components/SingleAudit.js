@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
-import { Button, Card, Typography, FormControl, TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
+import { Button, Typography, FormControl, Box, TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AuditCard from './styles/AuditCard';
+import QuestionsContainer from './styles/QuestionsContainer';
+import Error from './Error';
 
 const useStyles = makeStyles(() => ({
-    card: {
-        minHeight: 100,
-        maxHeight: 100,
-        padding: 15,
-        marginBottom: 10
-    },
-
-
     text: {
         color: "#3f51b5"
     },
@@ -22,7 +17,9 @@ const useStyles = makeStyles(() => ({
     },
 
     input: {
-        marginBottom: 25
+        marginBottom: 25,
+        maxWidth: "49%",
+
     },
 
     radioGroup: {
@@ -30,25 +27,14 @@ const useStyles = makeStyles(() => ({
         textAlign: "left"
     },
 
-    questions: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
-
-    questionsOne: {
-        minWidth: "49%",
-        maxWidth: "49%",
-    },
-
-    questionsTwo: {
+    questionsColumn: {
         minWidth: "49%",
         maxWidth: "49%",
     }
+
 }));
 
-
-export default function SingleAudit({ name, id, getMachins }) {
+export default function SingleAudit({ name, id }) {
     const classes = useStyles();
     const [info, setInfo] = useState({
         lastAudit: "",
@@ -66,21 +52,75 @@ export default function SingleAudit({ name, id, getMachins }) {
         answer9: "",
         answer10: ""
 
-    })
+    });
 
+    const [nameError, setNameError] = useState({});
+    const [dateError, setDateError] = useState({});
+    const [radioError, setRadioError] = useState({});
 
-    const url = "http://localhost:3001/slitter";
-    //
-    //"http://localhost:3001/slitter"
-    // const machins = () => {
-    //     if (typeof getMachins === "function") {
-    //         getMachins();
-    //     }
-    // };
+    const validate = () => {
+        const nameError = {};
+        const radioError = {};
+        let isValid = true;
+
+        if (info.who.trim().length < 3) {
+            nameError.shortname = "Podane imię jest zbyt krótkie";
+            isValid = false;
+        }
+
+        if (info.who.trim().length > 40) {
+            nameError.longname = "Podane imię jest zbyt długie";
+            isValid = false;
+        }
+
+        if (status.answer1.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer2.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer3.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer4.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer5.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer6.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer7.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer8.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer9.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        if (status.answer10.length === 0) {
+            radioError.empty = "Wybierz jedno";
+            isValid = false;
+        }
+        setRadioError(radioError);
+        setNameError(nameError);
+        return isValid;
+    };
 
     const addAudit = (id) => {
-        fetch(`${url}/${id}`, {
-            method: "PUT",
+        fetch(`http://localhost:3001/slitter/${id}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -93,9 +133,18 @@ export default function SingleAudit({ name, id, getMachins }) {
         })
             .then(response => response.json())
             .then(json => console.log(json))
-            // .then(() => machins())
             .catch(err => console.log(err))
     };
+
+    const onSubmit = () => {
+        const isValid = validate();
+        if (isValid) {
+            addAudit(id);
+        } else {
+            console.log("error")
+        }
+    };
+
 
     const infoHandler = (e) => {
         const { name, value } = e.target;
@@ -105,9 +154,7 @@ export default function SingleAudit({ name, id, getMachins }) {
                 [name]: value,
             }
         })
-    }
-
-
+    };
 
     const statusHandler = (e) => {
         const { name, value } = e.target;
@@ -117,16 +164,14 @@ export default function SingleAudit({ name, id, getMachins }) {
                 [name]: value,
             }
         })
-    }
-
+    };
 
     return (
         <Accordion>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
-                id="panel1a-header"
-            >
+                id="panel1a-header">
                 <Typography
                     variant="h4"
                     className={classes.text}>
@@ -136,7 +181,6 @@ export default function SingleAudit({ name, id, getMachins }) {
                         Kliknij by przeprowadzić audyt
                     </Typography>
                 </Typography>
-
             </AccordionSummary>
             <AccordionDetails>
                 <FormControl
@@ -147,19 +191,24 @@ export default function SingleAudit({ name, id, getMachins }) {
                         name="who"
                         label="Podaj imię"
                         onChange={infoHandler}
-                    />
+                    ></TextField>
+                    {Object.keys(nameError).map((key) => {
+                        return (
+                            <Error
+                                key={key}
+                                name={nameError[key]} />
+                        )
+                    })}
                     <TextField
                         className={classes.input}
                         name="lastAudit"
                         type="date"
                         onChange={infoHandler}
                     />
-                    <div
-                        className={classes.questions}>
-                        <div
-                            className={classes.questionsOne}>
-                            <Card
-                                className={classes.card}>
+                    <QuestionsContainer>
+                        <Box
+                            className={classes.questionsColumn}>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend"
@@ -173,9 +222,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów</FormLabel>
@@ -187,9 +242,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone</FormLabel>
@@ -201,9 +262,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">4. Limity wysokości i ilości są oczywist</FormLabel>
@@ -215,9 +282,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc</FormLabel>
@@ -229,12 +302,18 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                        </div>
-                        <div
-                            className={classes.questionsTwo}>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                        </Box>
+                        <Box
+                            className={classes.questionsColumns}>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">6. Materiały czyszczące są łatwo dostępne</FormLabel>
@@ -246,9 +325,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">7. Standardy są znane i widoczne</FormLabel>
@@ -260,9 +345,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnyh</FormLabel>
@@ -274,9 +365,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">9. Wszyscy pracownicy przeszli szkolenie 5S</FormLabel>
@@ -288,9 +385,15 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                            <Card
-                                className={classes.card}>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                            <AuditCard>
                                 <FormLabel
                                     className={classes.formHelper}
                                     component="legend">10. Wszystkie materiały i procedury są dostępne i aktualne </FormLabel>
@@ -302,20 +405,25 @@ export default function SingleAudit({ name, id, getMachins }) {
                                     <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                                     <FormControlLabel value="fail" control={<Radio />} label="Nie" />
                                 </RadioGroup>
-                            </Card>
-                        </div>
-                    </div>
+                                {Object.keys(radioError).map((key) => {
+                                    return (
+                                        <Error
+                                            key={key}
+                                            name={radioError[key]} />
+                                    )
+                                })}
+                            </AuditCard>
+                        </Box>
+                    </QuestionsContainer>
                     <Button
                         type="submit"
                         variant="outlined"
                         color="primary"
-                        onClick={() => addAudit(id)}>
+                        onClick={onSubmit}>
                         Zapisz i prześlij
                     </Button>
                 </FormControl>
             </AccordionDetails>
         </Accordion>
-
-
     )
 }
