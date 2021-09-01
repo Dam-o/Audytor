@@ -1,4 +1,14 @@
-.makeStyles-listItem-4:hover {
-    text-decoration: underline;
+.makeStyles-paper:hover {
+    cursor: pointer;
+}
 
+html,
+body {
+    height: 100vh;
+}
+
+
+
+.MuiLink-underlineHover:hover {
+    text-decoration: none !important;
 }

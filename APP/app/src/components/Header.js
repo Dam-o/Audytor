@@ -1,13 +1,9 @@
 
 import React, { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { Typography } from '@material-ui/core';
+import { Link, Toolbar, AppBar } from '@material-ui/core';
+import Menu from "./Menu";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from "./Menu";
-
-
 
 
 export default function Header() {
@@ -16,12 +12,8 @@ export default function Header() {
         setOpen(!open);
     }
 
-
-
-
     return (
         <>
-
             <AppBar
                 position='static'
             >
@@ -35,20 +27,19 @@ export default function Header() {
                         <MenuIcon />
 
                     </IconButton>
-                    <Typography
-                        variant='h4'>
-                        Audytor
-                    </Typography>
+                    <Link
+                        className="link"
+                        href="/"
+                        variant="h4"
+                        color="inherit"
+                    >Audytor</Link>
                 </Toolbar>
             </AppBar>
+
             {open &&
                 (
                     <Menu />
                 )}
-
-
-
-
 
         </>
     )
