@@ -10,12 +10,14 @@ const useStyles = makeStyles(() => ({
     card: {
         color: "#3f51b5",
         padding: 20,
-        height: 314,
+        height: 450,
         display: "flex",
         justifyContent: "space-between"
     },
-    list: {
-        display: "flex"
+    listItem: {
+        display: "inline-block",
+        left: 40,
+
     }
 
 }));
@@ -25,6 +27,7 @@ const useStyles = makeStyles(() => ({
 export default function SingleMachine({ name, type, date, status }) {
 
     const classes = useStyles();
+
     return (
         <Card
             className={classes.card}>
@@ -42,15 +45,14 @@ export default function SingleMachine({ name, type, date, status }) {
                     Ostatni audyt: {date}
                 </Typography>
             </Box>
-            <List
-                className={classes.list}
-            >
+            <List   >
                 Wyniki: {
                     Object.keys(status).map(key => {
                         return (
                             <ListItem
+                                className={classes.listItem}
                                 key={key}>
-                                {status[key]}
+                                {`${key}: ${status[key]}`}
                             </ListItem>
                         )
                     })}
