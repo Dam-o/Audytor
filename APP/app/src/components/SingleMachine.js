@@ -1,53 +1,64 @@
-import React from 'react';
-import { Card, Typography } from '@material-ui/core';
-import { makeStyles, Button, Icon } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import SettingsIcon from '@material-ui/icons/Settings';
+
+
+import React from 'react'
+import { Typography, Card, Box, List, ListItem } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
 
 
 const useStyles = makeStyles(() => ({
     card: {
         color: "#3f51b5",
-        marginBottom: 25,
-        padding: 15,
+        padding: 20,
+        height: 314,
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        cursor: "pointer"
+        justifyContent: "space-between"
     },
-    icon: {
-        fontSize: 30,
-        verticalAlign: "middle",
-        marginBottom: 8
+    list: {
+        display: "flex"
     }
 
 }));
 
 
-export default function SingleMachine({ name }) {
-    const classes = useStyles();
-    const history = useHistory();
 
+export default function SingleMachine({ name, type, date, status }) {
+
+    const classes = useStyles();
     return (
         <Card
-            className={classes.card}
-            onClick={() => history.push("/machins")}>
-            <Typography
-                variant="h4"
+            className={classes.card}>
+            <Box>
+                <Typography
+                    variant="h2">
+                    {name}
+                </Typography>
+                <Typography
+                    variant="subtitle1">
+                    {type}
+                </Typography>
+                <Typography
+                    variant="subtitle1">
+                    Ostatni audyt: {date}
+                </Typography>
+            </Box>
+            <List
+                className={classes.list}
             >
-                <SettingsIcon
-                    className={classes.icon} />
-                {name}
-            </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                endIcon={<Icon>send</Icon>}
-            >
-                Przejdź do
-            </Button>
+                Wyniki: {
+                    Object.keys(status).map(key => {
+                        return (
+                            <ListItem
+                                key={key}>
+                                {status[key]}
+                            </ListItem>
+                        )
+                    })}
 
-        </Card >
+            </List>
+
+
+
+        </Card>
     )
 }

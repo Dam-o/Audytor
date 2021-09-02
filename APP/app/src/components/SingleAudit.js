@@ -74,55 +74,21 @@ export default function SingleAudit({ name, id }) {
             isValid = false;
         }
 
-        if (status.answer1.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer2.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer3.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer4.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer5.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer6.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer7.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer8.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer9.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
-        if (status.answer10.length === 0) {
-            radioError.empty = "Wybierz jedno";
-            isValid = false;
-        }
+        Object.keys(status).forEach(key => {
+            if (status[key].length === 0) {
+                radioError.empty = "Wybierz jedno";
+                isValid = false;
+            }
+        })
+
         setDateError(dateError);
         setRadioError(radioError);
         setNameError(nameError);
         return isValid;
     };
 
-
     const addAudit = (id) => {
-        fetch(`http://localhost:3001/slitter/${id}`, {
+        fetch(`https://sliiter-fake-api.herokuapp.com/slitter/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

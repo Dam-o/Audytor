@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import SingleMachine from './SingleMachine';
+import MachineWidget from './MachineWidget';
+
 
 
 export default function Machins() {
     const [slitter, setSlitter] = useState([]);
 
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
+    const url = "https://sliiter-fake-api.herokuapp.com/slitter";
 
     useEffect(() => {
         fetch(url)
@@ -23,7 +24,7 @@ export default function Machins() {
             {
                 slitter.map((item, index) => {
                     return (
-                        <SingleMachine
+                        <MachineWidget
                             key={index}
                             name={item.name}
                             type={item.type}
