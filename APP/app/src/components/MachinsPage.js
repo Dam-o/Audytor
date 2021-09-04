@@ -28,7 +28,6 @@ export default function MachinsPage() {
     }, []);
 
     return (
-
         <Container
             className={classes.container}>
             {
@@ -45,6 +44,7 @@ export default function MachinsPage() {
                 })
             }
         </Container>
+
 
     )
 }

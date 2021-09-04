@@ -1,65 +1,27 @@
-
-
-import React from 'react'
-import { Typography, Card, Box, List, ListItem } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-
-
-
-const useStyles = makeStyles(() => ({
-    card: {
-        color: "#3f51b5",
-        padding: 20,
-        height: 450,
-        display: "flex",
-        justifyContent: "space-between"
-    },
-    listItem: {
-        display: "inline-block",
-        left: 40,
-    }
-
-}));
+import React from 'react';
+import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AccordionHeader from './AccordionHeader';
 
 
 
 export default function SingleMachine({ name, type, date, status }) {
 
-    const classes = useStyles();
+
 
     return (
-        <Card
-            className={classes.card}>
-            <Box>
-                <Typography
-                    variant="h2">
-                    {name}
+        <Accordion>
+            <AccordionHeader
+                name={name}
+                text={"Kliknij by zobaczyć szczegóły"} />
+
+            <AccordionDetails>
+                <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                    sit amet blandit leo lobortis eget.
                 </Typography>
-                <Typography
-                    variant="subtitle1">
-                    {type}
-                </Typography>
-                <Typography
-                    variant="subtitle1">
-                    Ostatni audyt: {date}
-                </Typography>
-            </Box>
-            <List   >
-                Wyniki: {
-                    Object.keys(status).map(key => {
-                        return (
-                            <ListItem
-                                className={classes.listItem}
-                                key={key}>
-                                {`${key}: ${status[key]}`}
-                            </ListItem>
-                        )
-                    })}
+            </AccordionDetails>
+        </Accordion>
 
-            </List>
-
-
-
-        </Card>
     )
 }

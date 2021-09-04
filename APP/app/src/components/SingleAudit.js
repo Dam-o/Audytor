@@ -1,28 +1,17 @@
 import React, { useState } from 'react'
-import { Button, Typography, FormControl, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
+import { Button, Typography, FormControl, Accordion, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuestionsContainer from './styles/QuestionsContainer';
 import Error from './Error';
 import QuestionsColumnLeft from './QuestionsColumnLeft';
 import NameAndDate from './NameAndDate';
 import QuestionsColumnRight from './QuestionsColumnRight';
 import Success from './Success';
+import AccordionHeader from './AccordionHeader';
 
-const useStyles = makeStyles(() => ({
-    text: {
-        color: "#3f51b5"
-    },
-
-    icon: {
-        verticalAlign: "middle",
-        marginLeft: 10
-    },
-
-}));
 
 export default function SingleAudit({ name, id }) {
-    const classes = useStyles();
+
     const [info, setInfo] = useState({
         lastAudit: "",
         who: ""
@@ -140,22 +129,10 @@ export default function SingleAudit({ name, id }) {
 
     return (
         <>
-
             <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header">
-                    <Typography
-                        variant="h4"
-                        className={classes.text}>
-                        {name}
-                        <Typography
-                            variant="body1">
-                            Kliknij by przeprowadzić audyt
-                        </Typography>
-                    </Typography>
-                </AccordionSummary>
+                <AccordionHeader
+                    text={"Kliknij by przeprowadzić audyt "}
+                    name={name} />
                 <AccordionDetails>
                     <FormControl
                         component="fieldset"
