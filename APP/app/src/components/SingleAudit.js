@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Button, Typography, FormControl, Box, TextField, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AuditCard from './styles/AuditCard';
 import QuestionsContainer from './styles/QuestionsContainer';
 import Error from './Error';
 import Question from './Question';
@@ -134,6 +133,16 @@ export default function SingleAudit({ name, id }) {
         })
     };
 
+    const showRadioError =
+        Object.keys(radioError).map((key) => {
+            return (
+                <Error
+                    key={key}
+                    name={radioError[key]} />
+            )
+        });
+
+
     return (
 
         <Accordion>
@@ -184,149 +193,70 @@ export default function SingleAudit({ name, id }) {
                     <QuestionsContainer>
                         <Box
                             className={classes.questionsColumn}>
-                            <AuditCard>
-                                <Question
-                                    question={"1. Niepotrzebne urządzenia, narzędzia zostały usunięte"}
-                                    label={"sortSection"}
-                                    name={"answer1"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów"}
-                                    label={"sortSection"}
-                                    name={"answer2"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone"}
-                                    label={"setInOrderSection"}
-                                    name={"answer3"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"4. Limity wysokości i ilości są oczywiste"}
-                                    label={"setInOrderSection"}
-                                    name={"answer4"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc"}
-                                    label={"shineSection"}
-                                    name={"answer5"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
+                            <Question
+                                question={"1. Niepotrzebne urządzenia, narzędzia zostały usunięte"}
+                                label={"sortSection"}
+                                name={"answer1"}
+                                func={statusHandler}
+                                error={showRadioError}
+                            />
+                            <Question
+                                question={"2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów"}
+                                label={"sortSection"}
+                                name={"answer2"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone"}
+                                label={"setInOrderSection"}
+                                name={"answer3"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"4. Limity wysokości i ilości są oczywiste"}
+                                label={"setInOrderSection"}
+                                name={"answer4"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc"}
+                                label={"shineSection"}
+                                name={"answer5"}
+                                func={statusHandler}
+                                error={showRadioError} />
                         </Box>
                         <Box
                             className={classes.questionsColumns}>
-                            <AuditCard>
-                                <Question
-                                    question={"6. Materiały czyszczące są łatwo dostępne"}
-                                    label={"shineSection"}
-                                    name={"answer6"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"7. Standardy są znane i widoczne"}
-                                    label={"standarizeSection"}
-                                    name={"answer7"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnych"}
-                                    label={"standarizeSection"}
-                                    name={"answer8"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"9. Wszyscy pracownicy przeszli szkolenie 5S"}
-                                    label={"sustainSection"}
-                                    name={"answer9"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
-                            <AuditCard>
-                                <Question
-                                    question={"10. Wszystkie materiały i procedury są dostępne i aktualne"}
-                                    label={"sustainSection"}
-                                    name={"answer10"}
-                                    func={statusHandler} />
-                                {Object.keys(radioError).map((key) => {
-                                    return (
-                                        <Error
-                                            key={key}
-                                            name={radioError[key]} />
-                                    )
-                                })}
-                            </AuditCard>
+                            <Question
+                                question={"6. Materiały czyszczące są łatwo dostępne"}
+                                label={"shineSection"}
+                                name={"answer6"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"7. Standardy są znane i widoczne"}
+                                label={"standarizeSection"}
+                                name={"answer7"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnych"}
+                                label={"standarizeSection"}
+                                name={"answer8"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"9. Wszyscy pracownicy przeszli szkolenie 5S"}
+                                label={"sustainSection"}
+                                name={"answer9"}
+                                func={statusHandler}
+                                error={showRadioError} />
+                            <Question
+                                question={"10. Wszystkie materiały i procedury są dostępne i aktualne"}
+                                label={"sustainSection"}
+                                name={"answer10"}
+                                func={statusHandler}
+                                error={showRadioError} />
                         </Box>
                     </QuestionsContainer>
                     <Button
