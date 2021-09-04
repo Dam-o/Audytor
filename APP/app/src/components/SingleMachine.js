@@ -1,65 +1,84 @@
+import React from 'react';
+import { Accordion, Box, AccordionDetails, Typography, List } from '@material-ui/core';
+import AccordionHeader from './AccordionHeader';
+import Answers from './Answers';
+import clsx from 'clsx';
 
 
-import React from 'react'
-import { Typography, Card, Box, List, ListItem } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
 const useStyles = makeStyles(() => ({
-    card: {
-        color: "#3f51b5",
-        padding: 20,
-        height: 450,
-        display: "flex",
-        justifyContent: "space-between"
+
+    delay: {
+        borderLeft: "10px solid #f50057"
     },
-    listItem: {
-        display: "inline-block",
-        left: 40,
+
+    details: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+
+    list: {
+        textAlign: "center",
+        marginRight: 50,
+        width: 300
+
     }
 
 }));
 
-
-
-export default function SingleMachine({ name, type, date, status }) {
+export default function SingleMachine({ name, date, status }) {
 
     const classes = useStyles();
 
+    const expireDate = new Date(date);
+    expireDate.setMonth(expireDate.getMonth() - 5);
+    const month = expireDate.getMonth();
+    const newMonth = Number(date.slice(5, 7));
+
     return (
-        <Card
-            className={classes.card}>
-            <Box>
-                <Typography
-                    variant="h2">
-                    {name}
-                </Typography>
-                <Typography
-                    variant="subtitle1">
-                    {type}
-                </Typography>
-                <Typography
-                    variant="subtitle1">
-                    Ostatni audyt: {date}
-                </Typography>
-            </Box>
-            <List   >
-                Wyniki: {
-                    Object.keys(status).map(key => {
-                        return (
-                            <ListItem
-                                className={classes.listItem}
-                                key={key}>
-                                {`${key}: ${status[key]}`}
-                            </ListItem>
-                        )
-                    })}
+        <Accordion
+            className={clsx((month - newMonth >= 6) && classes.delay)}>
+            <AccordionHeader
+                name={name}
+                text={"Kliknij by zobaczyć szczegóły"} />
+            <AccordionDetails
+                className={classes.details}>
+                <Box >
+                    <Typography
+                        color="primary"
+                        variant="h6"
+                        component="p">
+                        Data ostatniego audytu:
+                        <Box
+                            component="strong">
+                            {date}
+                        </Box>
+                    </Typography>
+                    {(month - newMonth >= 6) &&
+                        <Typography
+                            color="secondary"
+                            variant="subtitle2"
+                            component="span"
+                            display="block">
+                            Należy przeprowadzić audyt!</Typography>}
+                </Box>
+                <List
+                    className={classes.list} >
+                    {
+                        Object.keys(status).map(key => {
+                            return (
+                                <Answers
+                                    key={key}
+                                    name={key}
+                                    status={status[key]} />
+                            )
+                        })}
+                </List>
+            </AccordionDetails>
 
-            </List>
+        </Accordion >
 
-
-
-        </Card>
     )
 }

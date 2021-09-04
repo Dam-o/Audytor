@@ -48,6 +48,8 @@ const Widget = () => {
                     className={classes.icon} />
                 <Typography
                     variant="h4"
+                    component="h5"
+
                 >
                     Dodaj audyt
                 </Typography>
