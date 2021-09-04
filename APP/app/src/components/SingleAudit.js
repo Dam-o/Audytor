@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Typography, FormControl, Box, TextField, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
+import { Button, Typography, FormControl, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuestionsContainer from './styles/QuestionsContainer';
 import Error from './Error';
-import Question from './Question';
+import QuestionsColumnLeft from './QuestionsColumnLeft';
+import NameAndDate from './NameAndDate';
+import QuestionsColumnRight from './QuestionsColumnRight';
+import Success from './Success';
 
 const useStyles = makeStyles(() => ({
     text: {
@@ -51,6 +54,7 @@ export default function SingleAudit({ name, id }) {
     const [nameError, setNameError] = useState({});
     const [dateError, setDateError] = useState({});
     const [radioError, setRadioError] = useState({});
+    const [success, setSuccess] = useState(false);
 
     const validate = () => {
         const nameError = {};
@@ -108,6 +112,7 @@ export default function SingleAudit({ name, id }) {
         const isValid = validate();
         if (isValid) {
             addAudit(id);
+            setSuccess(!success);
         } else {
             console.log("error")
         }
@@ -133,142 +138,63 @@ export default function SingleAudit({ name, id }) {
         })
     };
 
-    const showRadioError =
-        Object.keys(radioError).map((key) => {
+    const showError = (error) => {
+        return Object.keys(error).map((key) => {
             return (
                 <Error
                     key={key}
-                    name={radioError[key]} />
+                    name={error[key]} />
             )
-        });
-
+        })
+    };
 
     return (
+        <>
 
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header">
-                <Typography
-                    variant="h4"
-                    className={classes.text}>
-                    {name}
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header">
                     <Typography
-                        variant="body1">
-                        Kliknij by przeprowadzić audyt
+                        variant="h4"
+                        className={classes.text}>
+                        {name}
+                        <Typography
+                            variant="body1">
+                            Kliknij by przeprowadzić audyt
+                        </Typography>
                     </Typography>
-                </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <FormControl
-                    component="fieldset"
-                >
-                    <TextField
-                        className={classes.input}
-                        name="who"
-                        label="Podaj imię"
-                        onChange={infoHandler}
-                    ></TextField>
-                    {Object.keys(nameError).map((key) => {
-                        return (
-                            <Error
-                                key={key}
-                                name={nameError[key]} />
-                        )
-                    })}
-                    <TextField
-                        className={classes.input}
-                        name="lastAudit"
-                        type="date"
-                        onChange={infoHandler}
-                    />
-                    {Object.keys(dateError).map((key) => {
-                        return (
-                            <Error
-                                key={key}
-                                name={dateError[key]} />
-                        )
-                    })}
-                    <QuestionsContainer>
-                        <Box
-                            className={classes.questionsColumn}>
-                            <Question
-                                question={"1. Niepotrzebne urządzenia, narzędzia zostały usunięte"}
-                                label={"sortSection"}
-                                name={"answer1"}
-                                func={statusHandler}
-                                error={showRadioError}
-                            />
-                            <Question
-                                question={"2. Nie ma niepotrzebnych/nieużywanych zasobów, części lub materiałów"}
-                                label={"sortSection"}
-                                name={"answer2"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"3. Przejścia, miejsca pracy, umiejscowienie sprzętu są zaznaczone"}
-                                label={"setInOrderSection"}
-                                name={"answer3"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"4. Limity wysokości i ilości są oczywiste"}
-                                label={"setInOrderSection"}
-                                name={"answer4"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"5. Podłogi, ściany, schody i powierzchnie nie są ubrudzone olejem, smarem, etc"}
-                                label={"shineSection"}
-                                name={"answer5"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                        </Box>
-                        <Box
-                            className={classes.questionsColumns}>
-                            <Question
-                                question={"6. Materiały czyszczące są łatwo dostępne"}
-                                label={"shineSection"}
-                                name={"answer6"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"7. Standardy są znane i widoczne"}
-                                label={"standarizeSection"}
-                                name={"answer7"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"8. Istnieją listy kontrolne dla wszystkich prac porządkowych i konserwacyjnych"}
-                                label={"standarizeSection"}
-                                name={"answer8"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"9. Wszyscy pracownicy przeszli szkolenie 5S"}
-                                label={"sustainSection"}
-                                name={"answer9"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                            <Question
-                                question={"10. Wszystkie materiały i procedury są dostępne i aktualne"}
-                                label={"sustainSection"}
-                                name={"answer10"}
-                                func={statusHandler}
-                                error={showRadioError} />
-                        </Box>
-                    </QuestionsContainer>
-                    <Button
-                        type="submit"
-                        variant="outlined"
-                        color="primary"
-                        onClick={onSubmit}>
-                        Zapisz i prześlij
-                    </Button>
-                </FormControl>
-            </AccordionDetails>
-        </Accordion >
+                </AccordionSummary>
+                <AccordionDetails>
+                    <FormControl
+                        component="fieldset"
+                    >
+                        <NameAndDate
+                            handler={infoHandler}
+                            nameError={showError(nameError)}
+                            dateError={showError(dateError)}
+                        />
+                        <QuestionsContainer>
+                            <QuestionsColumnLeft
+                                statusHandler={statusHandler}
+                                error={showError(radioError)} />
+                            <QuestionsColumnRight
+                                statusHandler={statusHandler}
+                                error={showError(radioError)} />
+                        </QuestionsContainer>
+                        <Button
+                            type="submit"
+                            variant="outlined"
+                            color="primary"
+                            onClick={onSubmit}>
+                            Zapisz i prześlij
+                        </Button>
+                    </FormControl>
+                </AccordionDetails>
+            </Accordion >
+            {success && <Success />}
+        </>
     )
 }
 

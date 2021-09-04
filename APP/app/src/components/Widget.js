@@ -24,6 +24,7 @@ const useStyles = makeStyles(() => ({
         width: 155,
         height: 155,
         marginBottom: 15,
+
     }
 
 
@@ -39,11 +40,9 @@ const Widget = () => {
 
     return (
         <Container>
-
             <Paper
                 onClick={() => history.push("/audyt")}
                 className={classes.paper}
-
             >
                 <AddBoxIcon
                     className={classes.icon} />
@@ -53,7 +52,6 @@ const Widget = () => {
                     Dodaj audyt
                 </Typography>
             </Paper>
-
         </Container>
     )
 }
