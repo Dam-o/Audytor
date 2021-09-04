@@ -19,7 +19,7 @@ export default function Audyt() {
     const classes = useStyles();
     const [slitter, setSlitter] = useState([]);
 
-    const url = "https://my-json-server.typicode.com/Dam-o/slitter/slitter";
+    const url = "https://sliiter-fake-api.herokuapp.com/slitter";
 
     const getMachins = () => {
         fetch(url)
@@ -46,7 +46,6 @@ export default function Audyt() {
                     )
                 })
             }
-
         </Container >
     )
 }
