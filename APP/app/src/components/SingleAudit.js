@@ -19,16 +19,6 @@ const useStyles = makeStyles(() => ({
         marginLeft: 10
     },
 
-    input: {
-        marginBottom: 25,
-        maxWidth: "49%",
-    },
-
-    questionsColumn: {
-        minWidth: "49%",
-        maxWidth: "49%",
-    }
-
 }));
 
 export default function SingleAudit({ name, id }) {

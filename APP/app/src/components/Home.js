@@ -9,12 +9,7 @@ import Machins from "./Machins";
 const useStyles = makeStyles(() => ({
     content: {
         flexGrow: 1,
-        height: '100vh',
         overflow: 'auto',
-    },
-
-    container: {
-
         marginTop: 25,
         overflow: 'hidden',
     },
@@ -24,31 +19,28 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
     const classes = useStyles();
     return (
-        <main
-            className={classes.content}>
-            <Container
-                fixed
-                maxWidth="xl"
-                className={classes.container}
+        <Container
+            fixed
+            className={classes.content}
+        >
+            <Grid
+                container
             >
                 <Grid
-                    container
-                >
-                    <Grid
-                        item
-                        xs={4}>
-                        <Widget />
+                    item
+                    xs={4}>
+                    <Widget />
 
-                    </Grid>
-                    <Grid
-                        item
-                        xs={8}>
-
-                        <Machins />
-                    </Grid>
                 </Grid>
-            </Container>
-        </main >
+                <Grid
+                    item
+                    xs={8}>
+
+                    <Machins />
+                </Grid>
+            </Grid>
+        </Container>
+
 
     );
 };

@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
+
+
 export default function Header() {
     const [open, setOpen] = useState(false);
     const toggleMenu = () => {
@@ -32,6 +34,7 @@ export default function Header() {
                         href="/"
                         variant="h4"
                         color="inherit"
+                        underline="none"
                     >Audytor</Link>
                 </Toolbar>
             </AppBar>

@@ -40,7 +40,6 @@ export default function MachinsPage() {
                             type={item.type}
                             date={item.lastAudit}
                             status={item.status}
-
                         />
                     )
                 })

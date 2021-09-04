@@ -9,7 +9,7 @@ const AuditCard = withStyles({
         marginBottom: 10,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
     }
 })(Card);
 

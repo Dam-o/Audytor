@@ -3,7 +3,6 @@ import Home from "./components/Home"
 import Header from "./components/Header";
 import { CssBaseline } from "@material-ui/core";
 import Audyt from "./components/Audyt";
-import History from "./components/History";
 import MachinsPage from "./components/MachinsPage";
 
 function App() {

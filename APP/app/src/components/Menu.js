@@ -1,12 +1,9 @@
 import React from 'react'
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core';
+import { Drawer, List, Link } from '@material-ui/core';
+import { ListItem, makeStyles, } from '@material-ui/core';
 import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import HistoryIcon from '@material-ui/icons/History';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,33 +15,24 @@ const useStyles = makeStyles((theme) => ({
 
     paper: {
         padding: theme.spacing(2),
-        overflow: 'auto',
+        overflow: 'hidden',
         marginBottom: 50,
     },
 
     list: {
-        paddingLeft: 15,
-        fontSize: 20,
+        fontSize: 25,
         display: "flex",
-        justifyContent: "space-around",
-        padding: 20,
     },
 
     listItem: {
-        textDecoration: 'none',
-        color: "#3f51b5",
-        fontWeight: 600,
-
+        display: "flex",
+        justifyContent: "center",
     },
-
     icon: {
         paddingRight: 5,
-        fontSize: 30,
-        marginBottom: 2,
+        fontSize: 35,
         verticalAlign: "middle"
-    },
-
-
+    }
 
 }));
 
@@ -62,35 +50,38 @@ export default function Menu() {
 
             <List
                 className={classes.list}>
-                <NavLink
-
-                    className={classes.listItem}
-                    exact to="/">
-                    <HomeIcon
-                        className={classes.icon} />
-                    Strona główna
-                </NavLink>
-                <NavLink
-                    className={classes.listItem}
-                    to="/audyt">
-                    <AssignmentTurnedInIcon
-                        className={classes.icon} />
-                    Audyt
-                </NavLink>
-                <NavLink
-                    className={classes.listItem}
-                    to="/machins">
-                    <SettingsIcon
-                        className={classes.icon} />
-                    Maszyny
-                </NavLink>
-                <NavLink
-                    className={classes.listItem}
-                    to="/history">
-                    <HistoryIcon
-                        className={classes.icon} />
-                    Historia
-                </NavLink>
+                <ListItem
+                    className={classes.listItem}>
+                    <Link
+                        className="link"
+                        href="/"
+                        color="primary"
+                        underline="hover">
+                        <HomeIcon
+                            className={classes.icon}
+                            color="primary"
+                        />Strona główna</Link>
+                </ListItem>
+                <ListItem
+                    className={classes.listItem}>
+                    <Link
+                        className="link"
+                        href="/audyt"
+                        color="primary"
+                        underline="hover">
+                        <AssignmentTurnedInIcon
+                            className={classes.icon} />Audyt</Link>
+                </ListItem>
+                <ListItem
+                    className={classes.listItem}>
+                    <Link
+                        className="link"
+                        href="/machins"
+                        color="primary"
+                        underline="hover">
+                        <SettingsIcon
+                            className={classes.icon} />Maszyny </Link>
+                </ListItem>
             </List>
         </Drawer >
     )
