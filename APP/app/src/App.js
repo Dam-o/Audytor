@@ -15,7 +15,6 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/audyt" component={Audyt} />
           <Route path="/machins" component={MachinsPage} />
-          <Route path="/history" component={History} />
         </Switch>
       </BrowserRouter>
     </>

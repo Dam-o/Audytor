@@ -1,11 +1,16 @@
 import React from 'react';
-import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Accordion, Box, AccordionDetails, Typography } from '@material-ui/core';
 import AccordionHeader from './AccordionHeader';
 
 
 
-export default function SingleMachine({ name, type, date, status }) {
+export default function SingleMachine({ name, date, status }) {
+
+    const expireDate = new Date(date);
+    expireDate.setMonth(expireDate.getMonth() - 5);
+    const month = expireDate.getMonth();
+    const newMonth = Number(date.slice(5, 7));
+
 
 
 
@@ -14,14 +19,27 @@ export default function SingleMachine({ name, type, date, status }) {
             <AccordionHeader
                 name={name}
                 text={"Kliknij by zobaczyć szczegóły"} />
-
             <AccordionDetails>
-                <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                    sit amet blandit leo lobortis eget.
-                </Typography>
+                <Box >
+                    <Typography
+                        color="primary"
+                        vairant="body1">
+                        Data ostatniego audytu:
+                        <Box
+                            component="strong">
+                            {date}
+                        </Box>
+                        {(month - newMonth >= 6) &&
+                            <Typography
+                                color="secondary"
+                                component="subtitle2"
+                                display="block">
+                                Należy przeprowadzić audyt!</Typography>}
+                    </Typography>
+
+                </Box>
             </AccordionDetails>
-        </Accordion>
+        </Accordion >
 
     )
 }
