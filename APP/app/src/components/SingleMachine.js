@@ -11,6 +11,19 @@ const useStyles = makeStyles(() => ({
 
     delay: {
         borderLeft: "10px solid #f50057"
+    },
+
+    details: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+
+    list: {
+        textAlign: "center",
+        marginRight: 50,
+        width: 300
+
     }
 
 }));
@@ -24,20 +37,19 @@ export default function SingleMachine({ name, date, status }) {
     const month = expireDate.getMonth();
     const newMonth = Number(date.slice(5, 7));
 
-
-
-
     return (
         <Accordion
             className={clsx((month - newMonth >= 6) && classes.delay)}>
             <AccordionHeader
                 name={name}
                 text={"Kliknij by zobaczyć szczegóły"} />
-            <AccordionDetails>
+            <AccordionDetails
+                className={classes.details}>
                 <Box >
                     <Typography
                         color="primary"
-                        variant="h5">
+                        variant="h6"
+                        component="p">
                         Data ostatniego audytu:
                         <Box
                             component="strong">
@@ -45,14 +57,15 @@ export default function SingleMachine({ name, date, status }) {
                         </Box>
                     </Typography>
                     {(month - newMonth >= 6) &&
-
                         <Typography
                             color="secondary"
-                            variant="body1"
+                            variant="subtitle2"
+                            component="span"
                             display="block">
                             Należy przeprowadzić audyt!</Typography>}
                 </Box>
-                <List >
+                <List
+                    className={classes.list} >
                     {
                         Object.keys(status).map(key => {
                             return (

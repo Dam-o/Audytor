@@ -5,15 +5,21 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-    listItem: {
+    answer: {
         display: "flex",
-        paddingBottom: 10
     },
 
     icon: {
         verticalAlign: "middle",
-    }
+        marginLeft: 10
+    },
 
+    listItem: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingBottom: 10
+    }
 
 }));
 
@@ -25,9 +31,10 @@ export default function Answers({ name, status }) {
         if (status === "pass") {
             return (
                 <Box
-                    className={classes.listItem}>
+                    className={classes.answer}>
                     <Typography
                         variant="subtitle1"
+                        component="p"
                         color="primary">
                         Zaliczone
                     </Typography>
@@ -38,9 +45,10 @@ export default function Answers({ name, status }) {
         } else {
             return (
                 <Box
-                    className={classes.listItem}>
+                    className={classes.answer}>
                     <Typography
                         variant="subtitle1"
+                        component="p"
                         color="secondary">
                         Niezaliczone
                     </Typography>
@@ -51,11 +59,30 @@ export default function Answers({ name, status }) {
         }
     };
 
+
+
+
+    const convertName = (name) => {
+        const number = name.match(/\d+/)
+
+        return (
+            <Typography
+                variant="subtitle1"
+                component="p"
+                color="primary">
+                {`Pytanie ${number}:`}
+            </Typography >
+        )
+    };
+
+
+
     convert();
     return (
 
-        <ListItem>
-            {convert(status)}
+        <ListItem
+            className={classes.listItem}>
+            {convertName(name)}  {convert(status)}
         </ListItem>
 
     )
