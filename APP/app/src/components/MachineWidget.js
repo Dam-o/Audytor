@@ -7,8 +7,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(() => ({
     card: {
-        color: "#3f51b5",
-        marginBottom: 25,
+        marginBottom: 20,
         padding: 15,
         display: "flex",
         justifyContent: "space-between",
@@ -34,6 +33,7 @@ export default function MachineWidget({ name }) {
             onClick={() => history.push("/machins")}>
             <Typography
                 variant="h4"
+                color="primary"
             >
                 <SettingsIcon
                     className={classes.icon} />
@@ -47,7 +47,6 @@ export default function MachineWidget({ name }) {
             >
                 Przejdź do
             </Button>
-
         </Card >
     )
 }

@@ -6,9 +6,10 @@ export default function AccordionHeader({ name, text }) {
 
     return (
         <AccordionSummary
-            expandIcon={<ExpandMoreIcon
-                color="primary"
-                fontSize="large" />}
+            expandIcon={
+                <ExpandMoreIcon
+                    color="primary"
+                    fontSize="large" />}
             aria-controls="panel1a-content"
             id="panel1a-header">
             <Typography

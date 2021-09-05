@@ -24,10 +24,9 @@ export default function Header() {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={toggleMenu}
-                    >
-                        <MenuIcon />
-
+                        onClick={toggleMenu}>
+                        <MenuIcon
+                            fontSize="large" />
                     </IconButton>
                     <Link
                         className="link"
