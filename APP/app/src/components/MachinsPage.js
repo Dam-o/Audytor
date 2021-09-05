@@ -25,10 +25,6 @@ export default function MachinsPage() {
             .then(err => console.log(err))
     }, []);
 
-
-
-
-
     return (
         <Container
             className={classes.container}>

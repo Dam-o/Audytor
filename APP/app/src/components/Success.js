@@ -11,13 +11,14 @@ const useStyles = makeStyles(() => ({
         bottom: 0,
         right: 0,
         overflow: "hidden",
-        background: "transparent",
-        height: "100vh",
         zIndex: 1000,
         textAlign: "center",
-        marginTop: 75
-    },
+        marginTop: 75,
+        marginBottom: 25,
+        backgroundColor: "white",
+        boxShadow: "-1px 0px 19px 2px rgba(66, 68, 90, 0.14)"
 
+    },
     popUpText: {
         color: "green",
         fontWeight: "bold",
@@ -26,8 +27,8 @@ const useStyles = makeStyles(() => ({
     },
     icon: {
         position: "absolute",
-        bottom: 640,
-        left: 1210,
+        top: 10,
+        right: 10,
         cursor: "pointer"
     }
 
@@ -41,13 +42,13 @@ export default function Success() {
     return (
         <Container
             className={classes.fullscreen}>
-            <Card>
-                <Typography
-                    variant="h2"
-                    className={classes.popUpText}>
-                    Odpowiedzi zostały przesłane.
-                </Typography>
-            </Card>
+
+            <Typography
+                variant="h2"
+                className={classes.popUpText}>
+                Odpowiedzi zostały przesłane.
+            </Typography>
+
             <CloseIcon
                 color="primary"
                 fontSize="large"

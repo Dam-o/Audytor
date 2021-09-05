@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-
     delay: {
         borderLeft: "10px solid #f50057"
     },

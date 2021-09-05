@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        color: "#3f51b5",
         cursor: "pointer",
 
     },
@@ -26,8 +25,6 @@ const useStyles = makeStyles(() => ({
         marginBottom: 15,
 
     }
-
-
 }));
 
 
@@ -45,16 +42,17 @@ const Widget = () => {
                 className={classes.paper}
             >
                 <AddBoxIcon
-                    className={classes.icon} />
+                    className={classes.icon}
+                    color="primary" />
                 <Typography
                     variant="h4"
                     component="h5"
-
+                    color="primary"
                 >
                     Dodaj audyt
                 </Typography>
             </Paper>
-        </Container>
+        </Container >
     )
 }
 

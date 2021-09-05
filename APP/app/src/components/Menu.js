@@ -5,16 +5,16 @@ import clsx from 'clsx';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import SettingsIcon from '@material-ui/icons/Settings';
+import transitions from '@material-ui/core/styles/transitions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     drawerPaper: {
         width: "100%",
         height: 75,
-        position: "relative"
+        position: "relative",
     },
 
     paper: {
-        padding: theme.spacing(2),
         overflow: 'hidden',
         marginBottom: 50,
     },
@@ -47,7 +47,6 @@ export default function Menu() {
                 paper: clsx(classes.drawerPaper),
             }}
         >
-
             <List
                 className={classes.list}>
                 <ListItem
