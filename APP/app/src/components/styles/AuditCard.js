@@ -5,7 +5,7 @@ const AuditCard = withStyles({
     root: {
         minHeight: 100,
         maxHeight: 100,
-        padding: 15,
+        padding: 10,
         marginBottom: 10,
         display: "flex",
         flexDirection: "column",

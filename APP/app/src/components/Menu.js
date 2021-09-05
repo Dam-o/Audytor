@@ -6,7 +6,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-
 const useStyles = makeStyles(() => ({
     drawerPaper: {
         width: "100%",

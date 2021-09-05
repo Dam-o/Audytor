@@ -6,6 +6,8 @@ const useStyles = makeStyles(() => ({
     error: {
         color: "red",
         textAlign: "right",
+        marginRight: 10,
+        zIndex: 200
     }
 }));
 

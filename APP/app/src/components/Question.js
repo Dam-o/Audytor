@@ -4,28 +4,25 @@ import { makeStyles } from '@material-ui/core/styles';
 import AuditCard from './styles/AuditCard';
 
 const useStyles = makeStyles(() => ({
-
     radioGroup: {
-        display: "inline-block",
-        textAlign: "left"
+        display: "inline",
     }
 }));
-
 
 export default function Question({ question, label, name, func, error }) {
     const classes = useStyles();
 
-
-
     return (
         <AuditCard>
             <FormLabel
-                component="legend">{question}</FormLabel>
+                component="legend"
+            >{question}
+            </FormLabel>
             <RadioGroup
                 className={classes.radioGroup}
                 aria-label={label}
                 name={name}
-                onChange={func} >
+                onChange={func}>
                 <FormControlLabel value="pass" control={<Radio />} label="Tak" />
                 <FormControlLabel value="fail" control={<Radio />} label="Nie" />
             </RadioGroup>

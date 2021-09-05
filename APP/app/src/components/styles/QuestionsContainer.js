@@ -6,7 +6,7 @@ const QuestionsContainer = withStyles({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: 0
+        padding: 0,
     }
 })(Container);
 

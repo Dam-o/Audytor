@@ -34,21 +34,17 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-
-
 export default function Success() {
     const classes = useStyles();
 
     return (
         <Container
             className={classes.fullscreen}>
-
             <Typography
                 variant="h2"
                 className={classes.popUpText}>
                 Odpowiedzi zostały przesłane.
             </Typography>
-
             <CloseIcon
                 color="primary"
                 fontSize="large"
