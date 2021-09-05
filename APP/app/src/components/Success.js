@@ -1,4 +1,4 @@
-import { Typography, Card, Container } from '@material-ui/core'
+import { Typography, Container } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';

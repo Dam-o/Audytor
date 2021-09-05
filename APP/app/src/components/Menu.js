@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import SettingsIcon from '@material-ui/icons/Settings';
-import transitions from '@material-ui/core/styles/transitions';
+
 
 const useStyles = makeStyles(() => ({
     drawerPaper: {
