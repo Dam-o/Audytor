@@ -50,6 +50,11 @@ export default function SingleAudit({ name, id }) {
             isValid = false;
         }
 
+        if (/[^a-zA-Z]/.test(info.who)) {
+            nameError.wrongtype = "Imię może zawierać tylko litery";
+            isValid = false;
+        }
+
         if (info.lastAudit.length === 0) {
             dateError.nodate = "Musisz wybrać datę";
             isValid = false;

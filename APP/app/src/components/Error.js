@@ -5,9 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
     error: {
         color: "red",
-        textAlign: "left",
-        maxWidth: "49%",
-
+        textAlign: "right",
     }
 }));
 
@@ -18,7 +16,10 @@ export default function Error({ name }) {
             component="span"
             className={classes.error}>
             <Typography
-                variant="subtitle2">{name}</Typography>
+                variant="subtitle2"
+                component="span">
+                {name}
+            </Typography>
         </Box>
     )
 }
