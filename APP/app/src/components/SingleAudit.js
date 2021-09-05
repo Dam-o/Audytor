@@ -50,7 +50,7 @@ export default function SingleAudit({ name, id }) {
             isValid = false;
         }
 
-        if (/[^a-zA-Z]/.test(info.who)) {
+        if (/[^a-zA-Z]/.test(info.who.trim())) {
             nameError.wrongtype = "Imię może zawierać tylko litery";
             isValid = false;
         }
