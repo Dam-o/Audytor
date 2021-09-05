@@ -36,6 +36,7 @@ export default function MachinsPage() {
                 slitter.map((item, index) => {
                     return (
                         <SingleMachine
+                            who={item.who}
                             key={index}
                             name={item.name}
                             date={item.lastAudit}

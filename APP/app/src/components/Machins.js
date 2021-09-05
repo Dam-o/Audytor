@@ -20,7 +20,6 @@ export default function Machins() {
 
     return (
         <>
-
             {
                 slitter.map((item, index) => {
                     return (

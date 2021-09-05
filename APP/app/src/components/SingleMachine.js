@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-export default function SingleMachine({ name, date, status }) {
+export default function SingleMachine({ name, date, status, who }) {
 
     const classes = useStyles();
 
@@ -50,6 +50,15 @@ export default function SingleMachine({ name, date, status }) {
                         color="primary"
                         variant="h6"
                         component="p">
+                        Audytor:
+                        <Box
+                            component="strong">
+                            {who}</Box>
+                    </Typography>
+                    <Typography
+                        color="primary"
+                        variant="h6"
+                        component="p">
                         Data ostatniego audytu:
                         <Box
                             component="strong">
@@ -62,7 +71,8 @@ export default function SingleMachine({ name, date, status }) {
                             variant="subtitle2"
                             component="span"
                             display="block">
-                            Należy przeprowadzić audyt!</Typography>}
+                            Należy przeprowadzić audyt!
+                        </Typography>}
                 </Box>
                 <List
                     className={classes.list} >
@@ -77,8 +87,6 @@ export default function SingleMachine({ name, date, status }) {
                         })}
                 </List>
             </AccordionDetails>
-
         </Accordion >
-
     )
 }
