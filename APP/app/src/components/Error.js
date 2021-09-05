@@ -7,7 +7,6 @@ const useStyles = makeStyles(() => ({
         color: "red",
         textAlign: "right",
         marginRight: 10,
-        zIndex: 200
     }
 }));
 

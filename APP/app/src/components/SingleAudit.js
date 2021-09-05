@@ -65,6 +65,7 @@ export default function SingleAudit({ name, id }) {
                 radioError.empty = "Wybierz jedno";
                 isValid = false;
             }
+
         })
 
         setDateError(dateError);
