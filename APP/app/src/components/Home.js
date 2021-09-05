@@ -9,7 +9,6 @@ import Machins from "./Machins";
 const useStyles = makeStyles(() => ({
     content: {
         flexGrow: 1,
-        overflow: 'auto',
         marginTop: 25,
         overflow: 'hidden',
     },
