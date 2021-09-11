@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SingleMachine from './SingleMachine';
+import { getSliiter } from './API/getSlitter';
 
 
 const useStyles = makeStyles(() => ({
@@ -19,10 +20,7 @@ export default function MachinsPage() {
     const classes = useStyles();
 
     useEffect(() => {
-        fetch("https://sliiter-fake-api.herokuapp.com/slitter")
-            .then(data => data.json())
-            .then(data => setSlitter(data))
-            .then(err => console.log(err))
+        getSliiter(setSlitter)
     }, []);
 
     return (
