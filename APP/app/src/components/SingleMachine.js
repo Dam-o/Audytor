@@ -1,55 +1,91 @@
 import React from 'react';
-import { Card, Typography } from '@material-ui/core';
-import { makeStyles, Button, Icon } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { Accordion, Box, AccordionDetails, Typography, List } from '@material-ui/core';
+import AccordionHeader from './AccordionHeader';
+import Answers from './Answers';
+import clsx from 'clsx';
 
+
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-    card: {
-        color: "#3f51b5",
-        marginBottom: 25,
-        padding: 15,
+    delay: {
+        borderLeft: "10px solid #f50057"
+    },
+
+    details: {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
-        cursor: "pointer"
+        alignItems: "center"
     },
-    icon: {
-        fontSize: 30,
-        verticalAlign: "middle",
-        marginBottom: 8
+
+    list: {
+        textAlign: "center",
+        marginRight: 50,
+        width: 300
+
     }
 
 }));
 
+export default function SingleMachine({ name, date, status, who }) {
 
-export default function SingleMachine({ name }) {
     const classes = useStyles();
-    const history = useHistory();
+
+    const expireDate = new Date(date);
+    expireDate.setMonth(expireDate.getMonth() - 5);
+    const month = expireDate.getMonth();
+    const newMonth = Number(date.slice(5, 7));
 
     return (
-        <Card
-            className={classes.card}
-            onClick={() => history.push("/machins")}>
-
-            <Typography
-                variant="h4"
-            >
-                <SettingsIcon
-                    className={classes.icon} />
-                {name}
-            </Typography>
-
-            <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                endIcon={<Icon>send</Icon>}
-            >
-                Przejdź do
-            </Button>
-
-        </Card >
+        <Accordion
+            className={clsx((month - newMonth >= 6) && classes.delay)}>
+            <AccordionHeader
+                name={name}
+                text={"Kliknij by zobaczyć szczegóły"} />
+            <AccordionDetails
+                className={classes.details}>
+                <Box >
+                    <Typography
+                        color="primary"
+                        variant="h6"
+                        component="p">
+                        Audytor:
+                        <Box
+                            component="strong">
+                            {who}</Box>
+                    </Typography>
+                    <Typography
+                        color="primary"
+                        variant="h6"
+                        component="p">
+                        Data ostatniego audytu:
+                        <Box
+                            component="strong">
+                            {date}
+                        </Box>
+                    </Typography>
+                    {(month - newMonth >= 6) &&
+                        <Typography
+                            color="secondary"
+                            variant="subtitle2"
+                            component="span"
+                            display="block">
+                            Należy przeprowadzić audyt!
+                        </Typography>}
+                </Box>
+                <List
+                    className={classes.list} >
+                    {
+                        Object.keys(status).map(key => {
+                            return (
+                                <Answers
+                                    key={key}
+                                    name={key}
+                                    status={status[key]} />
+                            )
+                        })}
+                </List>
+            </AccordionDetails>
+        </Accordion >
     )
 }

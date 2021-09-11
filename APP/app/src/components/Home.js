@@ -1,54 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import Widget from './Widget';
-import Machins from "./Machins";
+import MachineWidget from './MachineWidget';
+import { getSliiter } from './API/getSlitter';
 
 
 const useStyles = makeStyles(() => ({
     content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-    },
-
-    container: {
-
         marginTop: 25,
         overflow: 'hidden',
-    },
-
+    }
 }));
 
 const Home = () => {
+    const [slitter, setSlitter] = useState([]);
+
+    useEffect(() => {
+        getSliiter(setSlitter);
+    }, []);
+
     const classes = useStyles();
     return (
-        <main
-            className={classes.content}>
-            <Container
-                fixed
-                maxWidth="xl"
-                className={classes.container}
+        <Container
+            fixed
+            className={classes.content}
+        >
+            <Grid
+                container
             >
                 <Grid
-                    container
-                >
-                    <Grid
-                        item
-                        xs={4}>
-                        <Widget />
+                    item
+                    xs={4}>
+                    <Widget />
 
-                    </Grid>
-                    <Grid
-                        item
-                        xs={8}>
-
-                        <Machins />
-                    </Grid>
                 </Grid>
-            </Container>
-        </main >
+                <Grid
+                    item
+                    xs={8}
+                >
+                    {
+                        slitter.map((item, index) => {
+                            return (
+                                <MachineWidget
+                                    key={index}
+                                    name={item.name}
+                                    type={item.type}
+                                    audit={item.lastAudit}
+                                />
+                            )
+                        })
+                    }
+                </Grid>
+            </Grid>
+        </Container>
+
 
     );
 };
