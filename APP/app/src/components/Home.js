@@ -4,6 +4,7 @@ import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import Widget from './Widget';
 import MachineWidget from './MachineWidget';
+import { getSliiter } from './API/getSlitter';
 
 
 const useStyles = makeStyles(() => ({
@@ -17,10 +18,7 @@ const Home = () => {
     const [slitter, setSlitter] = useState([]);
 
     useEffect(() => {
-        fetch("https://sliiter-fake-api.herokuapp.com/slitter")
-            .then(data => data.json())
-            .then(data => setSlitter(data))
-            .catch(err => console.log(err))
+        getSliiter(setSlitter);
     }, []);
 
     const classes = useStyles();

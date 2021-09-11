@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import SingleAudit from './SingleAudit';
+import { getSliiter } from './API/getSlitter';
 
 const useStyles = makeStyles(() => ({
 
@@ -19,16 +20,8 @@ export default function Audyt() {
     const classes = useStyles();
     const [slitter, setSlitter] = useState([]);
 
-    const url = "https://sliiter-fake-api.herokuapp.com/slitter";
-
-    const getMachins = () => {
-        fetch(url)
-            .then(data => data.json())
-            .then(data => setSlitter(data))
-            .catch(err => console.log(err));
-    }
     useEffect(() => {
-        getMachins();
+        getSliiter(setSlitter);
     }, []);
 
     return (
@@ -41,7 +34,6 @@ export default function Audyt() {
                             key={index}
                             id={item.id}
                             name={item.name}
-                            getMachins={getMachins}
                         />
                     )
                 })

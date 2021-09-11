@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Button, FormControl, Accordion, AccordionDetails } from "@material-ui/core";
-import QuestionsContainer from './styles/QuestionsContainer';
 import Error from './Error';
-import QuestionsColumnLeft from './QuestionsColumnLeft';
 import NameAndDate from './NameAndDate';
-import QuestionsColumnRight from './QuestionsColumnRight';
 import Success from './Success';
 import AccordionHeader from './AccordionHeader';
+import Form from './Form';
+import { addAudit } from './API/getSlitter';
 
 
 export default function SingleAudit({ name, id }) {
@@ -26,7 +25,6 @@ export default function SingleAudit({ name, id }) {
         answer8: "",
         answer9: "",
         answer10: ""
-
     });
 
     const [nameError, setNameError] = useState({});
@@ -65,7 +63,6 @@ export default function SingleAudit({ name, id }) {
                 radioError.empty = "Wybierz jedno";
                 isValid = false;
             }
-
         })
 
         setDateError(dateError);
@@ -74,28 +71,15 @@ export default function SingleAudit({ name, id }) {
         return isValid;
     };
 
-    const addAudit = (id) => {
-        fetch(`https://sliiter-fake-api.herokuapp.com/slitter/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                lastAudit: info.lastAudit,
-                status: status,
-                who: info.who
-            })
-
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .catch(err => console.log(err))
-    };
-
     const onSubmit = () => {
         const isValid = validate();
+        const machinData = {
+            lastAudit: info.lastAudit,
+            status: status,
+            who: info.who
+        };
         if (isValid) {
-            addAudit(id);
+            addAudit(id, machinData);
             setSuccess(!success);
         } else {
             console.log("error")
@@ -147,14 +131,9 @@ export default function SingleAudit({ name, id }) {
                             nameError={showError(nameError)}
                             dateError={showError(dateError)}
                         />
-                        <QuestionsContainer>
-                            <QuestionsColumnLeft
-                                statusHandler={statusHandler}
-                                error={showError(radioError)} />
-                            <QuestionsColumnRight
-                                statusHandler={statusHandler}
-                                error={showError(radioError)} />
-                        </QuestionsContainer>
+                        <Form
+                            statusHandler={statusHandler}
+                            error={showError(radioError)} />
                         <Button
                             type="submit"
                             variant="outlined"

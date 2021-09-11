@@ -26,8 +26,7 @@ const useStyles = makeStyles(() => ({
 export default function Answers({ name, status }) {
     const classes = useStyles();
 
-
-    const convert = (status) => {
+    const convertAnswer = (status) => {
         if (status === "pass") {
             return (
                 <Box
@@ -57,14 +56,11 @@ export default function Answers({ name, status }) {
                         className={classes.icon} />
                 </Box>)
         }
+
     };
-
-
-
 
     const convertName = (name) => {
         const number = name.match(/\d+/)
-
         return (
             <Typography
                 variant="subtitle1"
@@ -77,12 +73,11 @@ export default function Answers({ name, status }) {
 
 
 
-    convert();
     return (
 
         <ListItem
             className={classes.listItem}>
-            {convertName(name)}  {convert(status)}
+            {convertName(name)}  {convertAnswer(status)}
         </ListItem>
 
     )
