@@ -1,6 +1,6 @@
 # Live version
 
-*[Audytor](https://audytor.herokuapp.com/)*
+[Audytor](https://audytor.herokuapp.com/)
 
 
 # Getting Started with Create React App
